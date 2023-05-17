@@ -4,25 +4,36 @@ namespace Pizzaria
     {
         private System.Windows.Forms.Timer timer;
         private DateTime dataInicial;
+        private DateTime tempoInicialPedido;
 
         public Form1()
         {
             InitializeComponent();
-            
+
             timer = new System.Windows.Forms.Timer();
             timer.Interval = 1000;
             timer.Tick += new EventHandler(Timer_Tick);
             timer.Start();
 
             dataInicial = DateTime.Now;
-            contadorHoras.Start();
         }
 
         private void Timer_Tick(object? sender, EventArgs e)
         {
-            var tempoDecorrido = DateTime.Now - dataInicial;
+            //var tempoDecorrido = DateTime.Now - dataInicial;
             lblTempoDecorrido.Text = DateTime.Now.ToString("HH:mm:ss");
-            lstHistoricoHoraData.Items.Add(tempoDecorrido.ToString());
+
+            //Percorre todos os itens da lista e atualiza o tempo decorrido
+            for(int i = 0; i < lstHistoricoHoraData.Items.Count; i++)
+            {
+                var tempoPedido = DateTime.Now - tempoInicialPedido;
+                lstHistoricoHoraData.Items[i] = tempoPedido.ToString(@"hh\:mm\:ss");
+
+                if(tempoPedido.Seconds > 10)
+                {
+                    //lstHistoricoHoraData.(i, Color.Red);
+                }
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -63,9 +74,6 @@ namespace Pizzaria
 
             //variável para concatenar os textos
             string strPedido = "Nº do Pedido: " + identificador.ToString();
-
-            DateTime dataPedido = DateTime.Now;
-            var tempoEspera = new TimeSpan();
 
             //Variável recebe o texto do ComboBox
             strSabor = cboSabores.Text;
@@ -122,6 +130,8 @@ namespace Pizzaria
                 strPedido = strPedido + " \nsem Borda Recheada";
             }
 
+            tempoInicialPedido = DateTime.Now;
+
             //Emite mensagem de formação do pedido
             MessageBox.Show(strPedido,
                             "Pizzaria",
@@ -131,15 +141,7 @@ namespace Pizzaria
             //Adicionar último pedido ao Histórico
             lstHistorico.Items.Add(strPedido);
 
-            var tempoDecorrido = DateTime.Now - dataInicial;
-            lstHistoricoHoraData.Items.Add(tempoDecorrido.ToString(@"hh\:mm\:ss"));
-        }
-
-        private void contadorHoras_Tick(object sender, EventArgs e)
-        {
-            //Atualize o Label com o tempo decorrido
-            var tempoDecorrido = DateTime.Now - dataInicial;
-            lblTempoDecorrido.Text = tempoDecorrido.ToString(@"hh\:mm\:ss");
+            lstHistoricoHoraData.Items.Add(tempoInicialPedido.ToString(@"hh\:mm\:ss"));
         }
     }
 }

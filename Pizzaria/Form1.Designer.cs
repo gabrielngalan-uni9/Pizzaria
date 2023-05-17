@@ -208,7 +208,7 @@
             // lblTempoDecorrido
             // 
             lblTempoDecorrido.AutoSize = true;
-            lblTempoDecorrido.Location = new Point(380, 235);
+            lblTempoDecorrido.Location = new Point(363, 235);
             lblTempoDecorrido.Name = "lblTempoDecorrido";
             lblTempoDecorrido.Size = new Size(38, 15);
             lblTempoDecorrido.TabIndex = 11;
