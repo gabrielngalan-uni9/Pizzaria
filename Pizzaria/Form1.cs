@@ -2,9 +2,27 @@ namespace Pizzaria
 {
     public partial class Form1 : Form
     {
+        private System.Windows.Forms.Timer timer;
+        private DateTime dataInicial;
+
         public Form1()
         {
             InitializeComponent();
+            
+            timer = new System.Windows.Forms.Timer();
+            timer.Interval = 1000;
+            timer.Tick += new EventHandler(Timer_Tick);
+            timer.Start();
+
+            dataInicial = DateTime.Now;
+            contadorHoras.Start();
+        }
+
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            var tempoDecorrido = DateTime.Now - dataInicial;
+            lblTempoDecorrido.Text = DateTime.Now.ToString("HH:mm:ss");
+            lstHistoricoHoraData.Items.Add(tempoDecorrido.ToString());
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -45,6 +63,9 @@ namespace Pizzaria
 
             //variável para concatenar os textos
             string strPedido = "Nº do Pedido: " + identificador.ToString();
+
+            DateTime dataPedido = DateTime.Now;
+            var tempoEspera = new TimeSpan();
 
             //Variável recebe o texto do ComboBox
             strSabor = cboSabores.Text;
@@ -101,9 +122,6 @@ namespace Pizzaria
                 strPedido = strPedido + " \nsem Borda Recheada";
             }
 
-            //Adiciona Data e Hora do pedido
-            strPedido = strPedido + " \n- Realizado em: " + DateTime.Now.ToString();
-
             //Emite mensagem de formação do pedido
             MessageBox.Show(strPedido,
                             "Pizzaria",
@@ -112,6 +130,16 @@ namespace Pizzaria
 
             //Adicionar último pedido ao Histórico
             lstHistorico.Items.Add(strPedido);
+
+            var tempoDecorrido = DateTime.Now - dataInicial;
+            lstHistoricoHoraData.Items.Add(tempoDecorrido.ToString(@"hh\:mm\:ss"));
+        }
+
+        private void contadorHoras_Tick(object sender, EventArgs e)
+        {
+            //Atualize o Label com o tempo decorrido
+            var tempoDecorrido = DateTime.Now - dataInicial;
+            lblTempoDecorrido.Text = tempoDecorrido.ToString(@"hh\:mm\:ss");
         }
     }
 }

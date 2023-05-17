@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             lblSabores = new Label();
             cboSabores = new ComboBox();
             grpIngredientes = new GroupBox();
@@ -41,6 +42,11 @@
             lstHistorico = new ListBox();
             label1 = new Label();
             pictureBox1 = new PictureBox();
+            label2 = new Label();
+            lblHora = new Label();
+            contadorHoras = new System.Windows.Forms.Timer(components);
+            lstHistoricoHoraData = new ListBox();
+            lblTempoDecorrido = new Label();
             grpIngredientes.SuspendLayout();
             grpBorda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -154,13 +160,13 @@
             lstHistorico.ItemHeight = 15;
             lstHistorico.Location = new Point(12, 258);
             lstHistorico.Name = "lstHistorico";
-            lstHistorico.Size = new Size(642, 199);
+            lstHistorico.Size = new Size(406, 199);
             lstHistorico.TabIndex = 6;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 235);
+            label1.Location = new Point(21, 235);
             label1.Name = "label1";
             label1.Size = new Size(174, 15);
             label1.TabIndex = 7;
@@ -174,13 +180,49 @@
             pictureBox1.TabIndex = 8;
             pictureBox1.TabStop = false;
             // 
+            // label2
+            // 
+            label2.Location = new Point(0, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(100, 23);
+            label2.TabIndex = 0;
+            // 
+            // lblHora
+            // 
+            lblHora.AutoSize = true;
+            lblHora.Location = new Point(12, 235);
+            lblHora.Name = "lblHora";
+            lblHora.Size = new Size(116, 15);
+            lblHora.TabIndex = 9;
+            lblHora.Text = "Histórico de Pedidos";
+            // 
+            // lstHistoricoHoraData
+            // 
+            lstHistoricoHoraData.FormattingEnabled = true;
+            lstHistoricoHoraData.ItemHeight = 15;
+            lstHistoricoHoraData.Location = new Point(424, 258);
+            lstHistoricoHoraData.Name = "lstHistoricoHoraData";
+            lstHistoricoHoraData.Size = new Size(230, 199);
+            lstHistoricoHoraData.TabIndex = 10;
+            // 
+            // lblTempoDecorrido
+            // 
+            lblTempoDecorrido.AutoSize = true;
+            lblTempoDecorrido.Location = new Point(380, 235);
+            lblTempoDecorrido.Name = "lblTempoDecorrido";
+            lblTempoDecorrido.Size = new Size(38, 15);
+            lblTempoDecorrido.TabIndex = 11;
+            lblTempoDecorrido.Text = "label3";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(666, 469);
+            Controls.Add(lblTempoDecorrido);
+            Controls.Add(lstHistoricoHoraData);
+            Controls.Add(lblHora);
             Controls.Add(pictureBox1);
-            Controls.Add(label1);
             Controls.Add(lstHistorico);
             Controls.Add(btnLimpar);
             Controls.Add(btnImprimir);
@@ -215,5 +257,10 @@
         private ListBox lstHistorico;
         private Label label1;
         private PictureBox pictureBox1;
+        private Label label2;
+        private Label lblHora;
+        private System.Windows.Forms.Timer contadorHoras;
+        private ListBox lstHistoricoHoraData;
+        private Label lblTempoDecorrido;
     }
 }
